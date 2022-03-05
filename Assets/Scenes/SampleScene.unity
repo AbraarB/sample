@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -149,6 +150,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcfde71b8ce7c74999b46b00ea46361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 713407100}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -221,6 +235,7 @@ GameObject:
   - component: {fileID: 713407102}
   - component: {fileID: 713407104}
   - component: {fileID: 713407103}
+  - component: {fileID: 713407106}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -400,6 +415,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7475357, y: 0.2718959}
   m_EdgeRadius: 0
+--- !u!95 &713407106
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713407098}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5509b0107448e5942a3273b5d085cbc8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &988732981
 GameObject:
   m_ObjectHideFlags: 0
