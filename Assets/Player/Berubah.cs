@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Berubah : MonoBehaviour
 {
-    SpriteRenderer playerTransform;
-    Sprite[] grimReaper;
+    public SpriteRenderer playerTransform;
+    public Sprite[] jadiGrimreaper;
 
     void TransformSprite()
     {
-        playerTransform.sprite = grimReaper[0];
+        playerTransform.sprite = jadiGrimreaper[0];
     }
 
     void Start()
