@@ -7,11 +7,15 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float playerWalkspeed = 5f;
     [SerializeField] float jumpHeight = 3f;
+    //[SerializeField] float dashDistance = 10f;
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
     CapsuleCollider2D playerBodycollider;
     BoxCollider2D playerFeetcollider;
+
+    //float dashCooldown;
+    //bool isDashing;
 
     void Start()
     {
@@ -26,25 +30,12 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
     }
 
+    // JALAN
     //input key jalan (A, D)
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
-    }
-
-    //input key loncat (space)
-    void OnJump(InputValue value)
-    {
-        if (!playerFeetcollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            return;
-        }
-        if (value.isPressed)
-        {
-            playerRigidbody.velocity += new Vector2(0f, jumpHeight);
-            Debug.Log("jumped");
-        }
     }
 
     //kecepatan jalan
@@ -64,4 +55,33 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(playerRigidbody.velocity.x), 1f);
         }
     }
+
+    // LONCAT
+    //input key loncat (space)
+    void OnJump(InputValue value)
+    {
+        if (!playerFeetcollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            return;
+        }
+        if (value.isPressed)
+        {
+            playerRigidbody.velocity += new Vector2(0f, jumpHeight);
+            Debug.Log("Jumped!");
+        }
+    }
+
+    // DASH
+    //input key dash (shift)
+    /*void OnDash(InputValue value)
+    {
+        //dash kiri
+        
+        
+        //dash kanan
+        
+        
+    }*/
+
+
 }
