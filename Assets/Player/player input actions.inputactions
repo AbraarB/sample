@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "b98410ee-f4a7-4b2c-b376-02617d104471",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Transform",
                     "type": "Button",
                     "id": "1cd84690-9338-4497-8a03-cc201aaddc74",
@@ -260,6 +269,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Transform",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d83cb495-c729-474f-b8de-b714abdb611e",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

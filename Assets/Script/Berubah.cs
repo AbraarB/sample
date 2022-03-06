@@ -6,29 +6,35 @@ using UnityEngine.InputSystem;
 public class Berubah : MonoBehaviour
 {
     public SpriteRenderer playerTransform;
-    public Sprite[] jadiGrimreaper;
+    public Sprite[] ncgrTransformation;
+    public int currentSprite;
 
-    void TransformSprite()
+    void JadiGrimReaper()
     {
-        playerTransform.sprite = jadiGrimreaper[0];
+        playerTransform.sprite = ncgrTransformation[currentSprite];
+        currentSprite++;
+        if(currentSprite >= ncgrTransformation.Length)
+        {
+            currentSprite = 0;
+        }
     }
 
     void Start()
     {
         playerTransform = gameObject.GetComponent<SpriteRenderer>();
-
     }
 
     void Update()
     {
-        
+
     }
 
-/*    void OnTransform(InputValue value)
+    void OnTransform(InputValue value)
     {
         if (value.isPressed)
         {
-
+            JadiGrimReaper();
+            Debug.Log("Transformed");
         }
-    }*/
+    }
 }

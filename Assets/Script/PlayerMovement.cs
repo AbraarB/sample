@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed)
         {
             playerRigidbody.velocity += new Vector2(0f, jumpHeight);
+            Debug.Log("jumped");
         }
     }
 
