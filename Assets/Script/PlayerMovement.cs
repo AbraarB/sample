@@ -8,6 +8,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float playerWalkspeed = 5f;
     [SerializeField] float jumpHeight = 3f;
     //[SerializeField] float dashDistance = 10f;
+    private float delay = 2f;
+    private Animator anim;
+    private bool isClicked;
+
+    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk}
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
@@ -16,18 +21,22 @@ public class PlayerMovement : MonoBehaviour
 
     //float dashCooldown;
     //bool isDashing;
+    MovementState state;
 
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerBodycollider = GetComponent<CapsuleCollider2D>();
         playerFeetcollider = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         Walk();
         FlipSprite();
+        Trans_nc_gm();
+
     }
 
     // JALAN
@@ -48,12 +57,37 @@ public class PlayerMovement : MonoBehaviour
     //player hadap kanan/kiri
     void FlipSprite()
     {
+        
         bool isPlayerMoving = Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon;
 
         if (isPlayerMoving)
         {
             transform.localScale = new Vector2(Mathf.Sign(playerRigidbody.velocity.x), 1f);
+
+            if (isClicked)
+            {
+                state = MovementState.gm_walk;
+            }
+            else
+            {
+                state = MovementState.nc_walk;
+            }
+            
         }
+        else
+        {
+            if (isClicked)
+            {
+                Invoke("gm_idle", delay);
+            }
+            else
+            {
+                state = MovementState.nc_idle;
+            }
+            
+        }
+
+        anim.SetInteger("state", (int) state);
     }
 
     // LONCAT
@@ -82,6 +116,25 @@ public class PlayerMovement : MonoBehaviour
         
         
     }*/
+
+    void Trans_nc_gm()
+    {
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            
+            state = MovementState.ncgmtrans;
+            isClicked = true;
+        }
+
+        anim.SetInteger("state", (int)state);
+    }
+
+    void gm_idle()
+    {
+        state = MovementState.gm_idle;
+    }
+
 
 
 }
