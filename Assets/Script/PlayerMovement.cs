@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool isClicked;
 
-    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk}
+    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gm_jump}
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
@@ -72,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 state = MovementState.nc_walk;
             }
-            
+
         }
-        else
+        else if (!isPlayerMoving)
         {
             if (isClicked)
             {
