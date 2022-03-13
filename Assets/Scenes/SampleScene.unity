@@ -2978,6 +2978,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7046758232144366950, guid: 1ec9d4dbf0dd83b4694098cbfc476b9d, type: 3}
+      propertyPath: dashCooldown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046758232144366950, guid: 1ec9d4dbf0dd83b4694098cbfc476b9d, type: 3}
+      propertyPath: dashDistance
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046758232144366950, guid: 1ec9d4dbf0dd83b4694098cbfc476b9d, type: 3}
       propertyPath: transCooldown
       value: 2
       objectReference: {fileID: 0}

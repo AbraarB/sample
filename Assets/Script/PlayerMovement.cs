@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float playerWalkspeed = 5f;
     [SerializeField] float jumpHeight = 3f;
-    //[SerializeField] float dashDistance = 10f;
+    [SerializeField] float dashDistance = 10f;
+    [SerializeField] float dashCooldown = 3f;
     [SerializeField] float transCooldown = 0f;
     
     private float delay = 0.42f;
@@ -16,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private float lastTransform;
     private int transformState = 1; //1 -> nc , 2 -> gr
 
+    private bool isDashing;
+    private float currentDashTime;
+    private float startDashTime;
+    private float movin;
+    private float dashDirection;
+
     private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gm_jump}
 
     Vector2 moveInput;
@@ -23,9 +30,6 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D playerBodycollider;
     BoxCollider2D playerFeetcollider;
 
-
-    //float dashCooldown;
-    //bool isDashing;
     MovementState state;
 
     void Start()
@@ -38,8 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        movin = Input.GetAxis("Horizontal");
+
         Walk();
         FlipSprite();
+        Dash();
         Trans_nc_gm();
 
         /*if (Input.GetKeyDown(KeyCode.X) && transformState == 1 && Time.time - lastTransform < transCooldown)
@@ -68,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(moveInput);
     }
 
-    //kecepatan jalan
+    //kecepatan jalan + dash mechanic
     void Walk()
     {
         Vector2 playerVelocity = new Vector2(moveInput.x * playerWalkspeed, playerRigidbody.velocity.y);
@@ -76,6 +83,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    //Dash
+    void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && movin != 0)
+        {
+            isDashing = true;
+            currentDashTime = startDashTime;
+            playerRigidbody.velocity = Vector2.zero;
+            dashDirection = (int)movin;
+            Debug.Log("Dashed!");
+        }
+
+        if (isDashing)
+        {
+            playerRigidbody.velocity = transform.right * dashDirection * dashDistance;
+
+            currentDashTime -= Time.deltaTime;
+
+            if (currentDashTime <= 0)
+            {
+                isDashing = false;
+            }
+        }
+    }
 
     //player hadap kanan/kiri
     void FlipSprite()
@@ -130,19 +161,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
-    // DASH
-    //input key dash (shift)
-    void OnDash(InputValue value)
-    {
-        //dash kiri
-        Debug.Log("Dashed left!");
-
-        //dash kanan
-        Debug.Log("Dashed right!");
-
-    }
 
 
     //berubah
