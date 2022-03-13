@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastTransform;
     private int transformState = 1; //1 -> nc , 2 -> gr
 
-    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gmnctrans}
+    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gm_jump}
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
@@ -95,9 +95,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 state = MovementState.nc_walk;
             }
-            
+
         }
-        else
+        else if (!isPlayerMoving)
         {
             if (isClicked)
             {
