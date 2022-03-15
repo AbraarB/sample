@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Berbalik
+  - projectile
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3087340745
+    locked: 0
+  - name: Projectile
+    uniqueID: 3910448745
     locked: 0
