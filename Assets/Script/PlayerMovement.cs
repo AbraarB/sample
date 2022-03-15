@@ -10,8 +10,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashDistance = 10f;
     [SerializeField] float dashCooldown = 3f;
     [SerializeField] float transCooldown = 0f;
-    
-    private float delay = 0.38f;
+
+    public GameObject bullet;
+    /*public NcProjectileBehavior ProjectilePrefab;*/
+    public Transform fire;
+    private float movin = 0f;
+    public float Force;
+    Vector3 dir;
+
+    private float delay = 0.01f;
     private Animator anim;
     private bool isClickedX;
     private bool isClickedC;
@@ -21,9 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing;
     private float currentDashTime;
     private float startDashTime;
-    private float movin;
     private float dashDirection;
-
+    private SpriteRenderer sprite;
     private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gmnctrans}
 
     Vector2 moveInput;
@@ -39,17 +45,20 @@ public class PlayerMovement : MonoBehaviour
         playerBodycollider = GetComponent<CapsuleCollider2D>();
         playerFeetcollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         movin = Input.GetAxis("Horizontal");
+        playerRigidbody.velocity = new Vector2(movin * playerWalkspeed, playerRigidbody.velocity.y);
 
-        Walk();
+        /*Walk();*/
         FlipSprite();
         Dash();
         Trans_nc_gm();
         trans_gm_nc();
+        shoot();
 
         /*if (Input.GetKeyDown(KeyCode.X) && transformState == 1 && Time.time - lastTransform < transCooldown)
         {
@@ -71,18 +80,18 @@ public class PlayerMovement : MonoBehaviour
 
     // JALAN
     //input key jalan (A, D)
-    void OnMove(InputValue value)
+    /*void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
-    }
+    }*/
 
     //kecepatan jalan + dash mechanic
-    void Walk()
+    /*void Walk()
     {
         Vector2 playerVelocity = new Vector2(moveInput.x * playerWalkspeed, playerRigidbody.velocity.y);
         playerRigidbody.velocity = playerVelocity;
-    }
+    }*/
 
 
     //Dash
@@ -113,8 +122,8 @@ public class PlayerMovement : MonoBehaviour
     //player hadap kanan/kiri
     void FlipSprite()
     {
-        
-        bool isPlayerMoving = Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon;
+
+        /*bool isPlayerMoving = Mathf.Abs(playerRigidbody.velocity.x) > Mathf.Epsilon;
 
         if (isPlayerMoving)
         {
@@ -141,9 +150,52 @@ public class PlayerMovement : MonoBehaviour
                 Invoke("nc_idle", delay);
             }
             
+        }*/
+
+        /*anim.SetInteger("state", (int) state);*/
+
+        if (movin < 0)
+        {
+            dir = Quaternion.AngleAxis(180, Vector3.forward) * Vector3.right;
+            transform.eulerAngles = new Vector3(0, 180, 0);
+
+            if (isClickedX)
+            {
+                state = MovementState.gm_walk;
+            }
+            else
+            {
+                state = MovementState.nc_walk;
+            }
+        }
+        else if (movin > 0)
+        {
+            dir = Quaternion.AngleAxis(0, Vector3.forward) * Vector3.right;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+
+            if (isClickedX)
+            {
+                state = MovementState.gm_walk;
+            }
+            else
+            {
+                state = MovementState.nc_walk;
+            }
+
+        }
+        else
+        {
+            if (isClickedX)
+            {
+                Invoke("gm_idle", delay);
+            }
+            else
+            {
+                Invoke("nc_idle", delay);
+            }
         }
 
-        anim.SetInteger("state", (int) state);
+        anim.SetInteger("state", (int)state);
     }
 
 
@@ -217,6 +269,17 @@ public class PlayerMovement : MonoBehaviour
             anim.SetInteger("state", (int)state);
             transformState = 1;
         }*/
+
+
+    void shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            GameObject Shoot = Instantiate(bullet, fire.position, fire.rotation);
+            Rigidbody2D rb = Shoot.GetComponent<Rigidbody2D>();
+            rb.AddForce(dir * Force, ForceMode2D.Impulse);
+        }
+    }
 
 
 
