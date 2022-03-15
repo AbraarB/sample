@@ -11,9 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashCooldown = 3f;
     [SerializeField] float transCooldown = 0f;
     
-    private float delay = 0.42f;
+    private float delay = 0.38f;
     private Animator anim;
-    private bool isClicked;
+    private bool isClickedX;
+    private bool isClickedC;
     private float lastTransform;
     private int transformState = 1; //1 -> nc , 2 -> gr
 
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float movin;
     private float dashDirection;
 
-    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gm_jump}
+    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gmnctrans}
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
@@ -48,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         Dash();
         Trans_nc_gm();
+        trans_gm_nc();
 
         /*if (Input.GetKeyDown(KeyCode.X) && transformState == 1 && Time.time - lastTransform < transCooldown)
         {
@@ -118,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = new Vector2(Mathf.Sign(playerRigidbody.velocity.x), 1f);
 
-            if (isClicked)
+            if (isClickedX)
             {
                 state = MovementState.gm_walk;
             }
@@ -130,13 +132,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!isPlayerMoving)
         {
-            if (isClicked)
+            if (isClickedX)
             {
                 Invoke("gm_idle", delay);
             }
             else
             {
-                state = MovementState.nc_idle;
+                Invoke("nc_idle", delay);
             }
             
         }
@@ -171,11 +173,25 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Berubah nc-gm!");
             state = MovementState.ncgmtrans;
-            isClicked = true;
+            isClickedX = true;
         }
 
         anim.SetInteger("state", (int)state);
-        transformState = 2;
+        //transformState = 2;
+    }
+
+    void trans_gm_nc()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Berubah gm-nc!");
+            state = MovementState.gmnctrans;
+            isClickedC = true;
+            isClickedX = false;
+        }
+
+        anim.SetInteger("state", (int)state);
+        //transformState = 1;
     }
 
     void gm_idle()
@@ -183,19 +199,24 @@ public class PlayerMovement : MonoBehaviour
         state = MovementState.gm_idle;
     }
 
-/*    void Trans_gm_nc()
+    void nc_idle()
     {
+        state = MovementState.nc_idle;
+    }
 
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-            Debug.Log("Berubah gm-nc!");
-            state = MovementState.gmnctrans;
-            isClicked = false;
-        //}
+    /*    void Trans_gm_nc()
+        {
 
-        anim.SetInteger("state", (int)state);
-        transformState = 1;
-    }*/
+            //if (Input.GetKeyDown(KeyCode.X))
+            //{
+                Debug.Log("Berubah gm-nc!");
+                state = MovementState.gmnctrans;
+                isClicked = false;
+            //}
+
+            anim.SetInteger("state", (int)state);
+            transformState = 1;
+        }*/
 
 
 
