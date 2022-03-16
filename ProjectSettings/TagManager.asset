@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Berbalik
   - projectile
+  - undead
   layers:
   - Default
   - TransparentFX
