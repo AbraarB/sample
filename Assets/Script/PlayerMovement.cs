@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float Force;
     Vector3 dir;
 
-    private float delay = 0.01f;
+    private float delay = 0.2f;
     private Animator anim;
     private bool isClickedX;
     private bool isClickedC;
@@ -275,9 +275,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            GameObject Shoot = Instantiate(bullet, fire.position, fire.rotation);
-            Rigidbody2D rb = Shoot.GetComponent<Rigidbody2D>();
-            rb.AddForce(dir * Force, ForceMode2D.Impulse);
+            if(isClickedX == false)
+            {
+                GameObject Shoot = Instantiate(bullet, fire.position, fire.rotation);
+                Rigidbody2D rb = Shoot.GetComponent<Rigidbody2D>();
+                rb.AddForce(dir * Force, ForceMode2D.Impulse);
+            }
+            
         }
     }
 
