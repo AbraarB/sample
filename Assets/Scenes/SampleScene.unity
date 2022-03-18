@@ -3186,7 +3186,7 @@ GameObject:
   - component: {fileID: 2028737114}
   m_Layer: 3
   m_Name: hitbox
-  m_TagString: Untagged
+  m_TagString: hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3214,8 +3214,8 @@ CircleCollider2D:
   m_GameObject: {fileID: 2028737112}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_Material: {fileID: 6200000, guid: 656499215b3349f4eaa9073585610d83, type: 2}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.2606454, y: 0.021020807}

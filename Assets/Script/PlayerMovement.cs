@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 dir;
 
     private float delay = 0.2f;
-    private float attackdelay = 0.3f;
+    private float attackdelay = 0.02f;
     private Animator anim;
     private bool isClickedX;
     private bool isAttack = false;
@@ -64,9 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (isAttack) return;
             attack();
-
             Invoke("resetAttack", attackdelay);
         }
 
@@ -172,6 +170,9 @@ public class PlayerMovement : MonoBehaviour
             if (isClickedX && isAttack == false)
             {
                 state = MovementState.gm_walk;
+            }else if (isClickedX && isAttack)
+            {
+                state = MovementState.gm_attack;
             }
             else if(isClickedX == false)
             {
@@ -187,6 +188,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 state = MovementState.gm_walk;
             }
+            else if (isClickedX && isAttack)
+            {
+                state = MovementState.gm_attack;
+            }
             else if(isClickedX == false)
             {
                 state = MovementState.nc_walk;
@@ -199,7 +204,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Invoke("gm_idle", delay);
             }
-            else if(!isClickedX)
+            else if (isClickedX && isAttack)
+            {
+                state = MovementState.gm_attack;
+            }
+            else if(!isClickedX && !isAttack)
             {
                 Invoke("nc_idle", delay);
             }
@@ -301,10 +310,8 @@ public class PlayerMovement : MonoBehaviour
         if(isClickedX == true)
         {
             isAttack = true;
-            state = MovementState.gm_attack;
         }
 
-        anim.SetInteger("state", (int)state);
     }
 
     void resetAttack()
@@ -312,7 +319,6 @@ public class PlayerMovement : MonoBehaviour
         if (isClickedX)
         {
             isAttack = false;
-            
         }
     }
 
