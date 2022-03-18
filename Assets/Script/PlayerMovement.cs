@@ -19,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 dir;
 
     private float delay = 0.2f;
+    private float attackdelay = 0.3f;
     private Animator anim;
     private bool isClickedX;
+    private bool isAttack = false;
     private bool isClickedC;
     private float lastTransform;
     private int transformState = 1; //1 -> nc , 2 -> gr
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float startDashTime;
     private float dashDirection;
     private SpriteRenderer sprite;
-    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gmnctrans}
+    private enum MovementState {nc_idle, nc_walk, ncgmtrans, gm_idle, gm_walk, gmnctrans, gm_attack}
 
     Vector2 moveInput;
     Rigidbody2D playerRigidbody;
@@ -59,6 +61,14 @@ public class PlayerMovement : MonoBehaviour
         Trans_nc_gm();
         trans_gm_nc();
         shoot();
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (isAttack) return;
+            attack();
+
+            Invoke("resetAttack", attackdelay);
+        }
 
         /*if (Input.GetKeyDown(KeyCode.X) && transformState == 1 && Time.time - lastTransform < transCooldown)
         {
@@ -159,11 +169,11 @@ public class PlayerMovement : MonoBehaviour
             dir = Quaternion.AngleAxis(180, Vector3.forward) * Vector3.right;
             transform.eulerAngles = new Vector3(0, 180, 0);
 
-            if (isClickedX)
+            if (isClickedX && isAttack == false)
             {
                 state = MovementState.gm_walk;
             }
-            else
+            else if(isClickedX == false)
             {
                 state = MovementState.nc_walk;
             }
@@ -173,11 +183,11 @@ public class PlayerMovement : MonoBehaviour
             dir = Quaternion.AngleAxis(0, Vector3.forward) * Vector3.right;
             transform.eulerAngles = new Vector3(0, 0, 0);
 
-            if (isClickedX)
+            if (isClickedX && isAttack == false)
             {
                 state = MovementState.gm_walk;
             }
-            else
+            else if(isClickedX == false)
             {
                 state = MovementState.nc_walk;
             }
@@ -185,11 +195,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (isClickedX)
+            if (isClickedX && isAttack == false)
             {
                 Invoke("gm_idle", delay);
             }
-            else
+            else if(!isClickedX)
             {
                 Invoke("nc_idle", delay);
             }
@@ -281,6 +291,27 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D rb = Shoot.GetComponent<Rigidbody2D>();
                 rb.AddForce(dir * Force, ForceMode2D.Impulse);
             }
+            
+        }
+    }
+
+    void attack()
+    {
+
+        if(isClickedX == true)
+        {
+            isAttack = true;
+            state = MovementState.gm_attack;
+        }
+
+        anim.SetInteger("state", (int)state);
+    }
+
+    void resetAttack()
+    {
+        if (isClickedX)
+        {
+            isAttack = false;
             
         }
     }
