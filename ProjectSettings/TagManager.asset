@@ -3,26 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Berbalik
-  - projectile
-  - undead
-  - hitbox
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Ground
-  - Enemies
-  - Projecitle
-<<<<<<< Updated upstream
-  - background
-=======
-  - Background
->>>>>>> Stashed changes
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,21 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: background
-    uniqueID: 2032332509
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Platform
-    uniqueID: 682540097
-    locked: 0
-  - name: Enemies
-    uniqueID: 673124721
-    locked: 0
-  - name: Player
-    uniqueID: 3087340745
-    locked: 0
-  - name: Projectile
-    uniqueID: 3910448745
     locked: 0
