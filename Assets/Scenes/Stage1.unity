@@ -410,7 +410,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 682540097
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -6750,7 +6750,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1207626551
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: abe4033ba5719c94989d1c9f280819cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6904,9 +6904,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 437420255518715519, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2273108882034488033, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
       propertyPath: m_Name
       value: backgorund
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273108882034488033, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2273108882034488035, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
       propertyPath: m_RootOrder
@@ -6951,6 +6959,14 @@ PrefabInstance:
     - target: {fileID: 2273108882034488035, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2964118550740587367, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094200685163439386, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b4ec59d476158e45bf62a4b3c3cb24d, type: 3}
