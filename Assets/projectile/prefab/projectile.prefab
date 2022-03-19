@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6475837457251216629}
   - component: {fileID: 6628072856822573478}
   - component: {fileID: 1683909848890562997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: projectile
   m_TagString: projectile
   m_Icon: {fileID: 0}
@@ -123,8 +123,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -384518551
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 159424025520584439}
   - component: {fileID: 5846992270451033951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: projectile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
