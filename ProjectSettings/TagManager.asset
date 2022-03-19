@@ -18,7 +18,7 @@ TagManager:
   - Ground
   - Enemies
   - Projecitle
-  - 
+  - background
   - 
   - 
   - 
@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 2032332509
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
