@@ -18,7 +18,11 @@ TagManager:
   - Ground
   - Enemies
   - Projecitle
+<<<<<<< Updated upstream
   - background
+=======
+  - Background
+>>>>>>> Stashed changes
   - 
   - 
   - 
