@@ -111,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
             currentDashTime = startDashTime;
             playerRigidbody.velocity = Vector2.zero;
             dashDirection = (int)movin;
-            Debug.Log("Dashed!");
         }
 
         if (isDashing)
@@ -230,7 +229,6 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed)
         {
             playerRigidbody.velocity += new Vector2(0f, jumpHeight);
-            Debug.Log("Jumped!");
         }
     }
 
@@ -242,7 +240,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log("Berubah nc-gm!");
             state = MovementState.ncgmtrans;
             isClickedX = true;
         }
@@ -255,7 +252,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("Berubah gm-nc!");
             state = MovementState.gmnctrans;
             isClickedC = true;
             isClickedX = false;
