@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private float movin = 0f;
     public float Force;
     Vector3 dir;
+    private bool doubleJump;
 
     private float delay = 0.2f;
     private float attackdelay = 0.02f;
@@ -224,16 +225,29 @@ public class PlayerMovement : MonoBehaviour
 
     // LONCAT
     //input key loncat (space)
-    void OnJump(InputValue value)
+    void OnJump()
     {
-        if (!playerFeetcollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (Input.GetButtonDown("Jump"))
         {
-            return;
+            if (playerFeetcollider.IsTouchingLayers(LayerMask.GetMask("Terrain")))
+            {
+                jump();
+                doubleJump = true;
+            }
+            else if (doubleJump)
+            {
+                jumpHeight = jumpHeight / 1.5f;
+                jump();
+                doubleJump = false;
+                jumpHeight = jumpHeight * 1.5f;
+            }
         }
-        if (value.isPressed)
-        {
-            playerRigidbody.velocity += new Vector2(0f, jumpHeight);
-        }
+
+    }
+
+    void jump()
+    {
+        playerRigidbody.velocity += new Vector2(0f, jumpHeight);
     }
 
 
