@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     private float lastTransform;
     private int transformState = 1; //1 -> nc , 2 -> gr
 
+    bool isAlive = true;
+
+
     private bool isDashing;
     private float currentDashTime;
     private float startDashTime;
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!isAlive){ return; }
         movin = Input.GetAxis("Horizontal");
         playerRigidbody.velocity = new Vector2(movin * playerWalkspeed, playerRigidbody.velocity.y);
 
@@ -83,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }*/
 
-
+        Die();
     }
 
     // JALAN
@@ -319,5 +323,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    void Die()
+    {
+        if (playerBodycollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Lava")))
+        {
+            isAlive = false;
+        }
+    }
 }
