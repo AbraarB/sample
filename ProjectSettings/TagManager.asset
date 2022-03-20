@@ -51,9 +51,6 @@ TagManager:
   - name: Terrain
     uniqueID: 2135837245
     locked: 0
-  - name: UI
-    uniqueID: 712977421
-    locked: 0
   - name: Lava
     uniqueID: 2510888545
     locked: 0
@@ -65,4 +62,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2691202221
+    locked: 0
+  - name: UI
+    uniqueID: 712977421
     locked: 0
