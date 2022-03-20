@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerHealth = 1;
+
+    [SerializeField] TextMeshProUGUI healthText;
+
     void Awake()
     {
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
@@ -20,6 +24,10 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        healthText.text = playerHealth.ToString();
+    }
     public void ProcessPlayerDeath()
     {
         if(playerHealth > 1)
@@ -34,7 +42,10 @@ public class GameSession : MonoBehaviour
 
     void TakeLife()
     {
-
+        playerHealth--;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+        healthText.text = playerHealth.ToString();
     }
 
     void ResetGameSession()

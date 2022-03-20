@@ -342,6 +342,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerBodycollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Lava")))
         {
             isAlive = false;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }
